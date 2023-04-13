@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <strong>年终抽奖</strong>
+    <h4>一等奖：<span id="one">???</span></h4>
+    <h4>二等奖：<span id="two">???</span></h4>
+    <h4>三等奖：<span id="three">???</span></h4>
+    <script>
+        const arr = ['小王', '小明', '张荣源']
+        let random1 = Math.floor(Math.random() * arr.length)
+        const one = document.querySelector('#one')
+        one.innerHTML = arr[random1]
+        arr.splice(random1, 1)
+
+         let random2 = Math.floor(Math.random() * arr.length)
+        const two = document.querySelector('#two')
+        two.innerHTML = arr[random2]
+        arr.splice(random2, 1)
+
+         let random3 = Math.floor(Math.random() * arr.length)
+        const three = document.querySelector('#three')
+        three.innerHTML = arr[random3]
+        arr.splice(random3, 1)
+    </script>
+</body>
+
+</html>

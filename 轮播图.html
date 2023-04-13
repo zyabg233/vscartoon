@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li,
+        ul {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            /* 清除a自带的下划线 */
+        }
+
+        img {
+            width: 400px;
+            height: 200px;
+            margin: auto;
+        }
+
+        .box {
+            position: relative;
+            height: 200px;
+            width: 100%;
+            padding-top: 50px;
+        }
+
+        .center {
+            position: relative;
+            margin: 0 auto;
+            width: 400px;
+            height: 200px;
+            background-color: beige;
+        }
+
+        .zuojiantou {
+            position: absolute;
+            height: 60px;
+            width: 20px;
+            left: 0;
+            top: 50%;
+            margin-top: -30px;
+            line-height: 60px;
+            color: aliceblue;
+            background: rgb(0, 0, 0, 0.3);
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
+            border: none;
+            text-align: center;
+            cursor: pointer;
+            /* 小手 */
+
+        }
+
+        .youjiantou {
+            position: absolute;
+            height: 60px;
+            width: 20px;
+            top: 50%;
+            right: 0;
+            margin-top: -30px;
+            line-height: 60px;
+            text-align: right;
+            background: rgb(0, 0, 0, 0.3);
+            color: aliceblue;
+            border-top-left-radius: 15px;
+            border-bottom-left-radius: 15px;
+            border: none;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .xiaodian {
+            position: absolute;
+            width: 80px;
+            height: 20px;
+            left: 50%;
+            bottom: 10px;
+            margin-left: -40px;
+            background: rgba(248, 249, 249, 0.3);
+            border-radius: 7px;
+
+        }
+
+        .xiaodian li {
+            width: 8px;
+            height: 10px;
+            float: left;
+            background-color: white;
+            border-radius: 50%;
+            margin: 4px 6px;
+        }
+
+        .donghua {
+            transform: scale(1.5);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="center">
+            <button class="zuojiantou">&lt</button>
+            <img src="png图标/茄子.png" alt="">
+            <button class="youjiantou">&gt</button>
+            <ul class="xiaodian">
+                <li class="donghua"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        const arr = [{ src: 'png图标/茄子.png', title: 'nangua' },
+        { src: 'png图标/南瓜.png', title: 'nangua' },
+        { src: 'png图标/西瓜.png', title: 'nangua' },
+        { src: 'png图标/蘑菇.png', title: 'nangua' }
+        ]
+        const box = document.querySelector('.box .center ')
+        const pic = document.querySelector('.box .center img')
+        const next = document.querySelector('.box .center .youjiantou')
+        const before = document.querySelector('.box .center .zuojiantou')
+        function common() {
+            pic.src = arr[i].src
+            document.querySelector(`.xiaodian .donghua`).classList.remove(`donghua`)
+            document.querySelector(`.xiaodian li:nth-child(${i + 1})`).classList.add(`donghua`)
+        }
+        let i = 0
+        let timeid = setInterval(function () {
+            // i++
+            // if (i >= arr.length) {
+            //     i = 0
+            // }
+            // 调用点击下一张图片的事件
+            next.click()
+            common()
+
+        }, 1000)
+        next.addEventListener('click', function () {
+            i++
+            // console.log(arr[i])
+            if (i >= arr.length) {
+                i = 0
+            }
+            common()
+        })
+        before.addEventListener('click', function () {
+            i--
+            if (i < 0) {
+                i = arr.length - 1
+            }
+            common()
+        })
+        box.addEventListener('mouseenter', function () {
+            clearInterval(timeid)
+        })
+        box.addEventListener('mouseleave', function () {
+            clearInterval(timeid)
+            //  开启定时器
+            timeid = setInterval(function () {
+                // 一定要加下括号调用函数
+                next.click()
+            }, 1000)
+        })
+
+    </script>
+</body>
+
+</html>

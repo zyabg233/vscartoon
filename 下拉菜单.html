@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jQuery.min.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            /* 不会影响盒子大小 */
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        li,
+        ul {
+            list-style: none;
+            height: 30px;
+             border: 1px solid yellow;
+        }
+
+        div {
+            position: absolute;
+            left: 30%;
+            top: 30%;
+        }
+
+        ul,
+        a {
+           
+            display: block;
+            height: 30px;
+            width: 100px;
+            text-align: center;
+            line-height: 30px;
+            
+        }
+        .nav {
+            float: left;
+            margin-left: 2px;
+            background-color: aqua;
+        }
+        .nav ul{
+            display: none;
+             height: 90px;
+        }
+      
+        .xiaoguo{
+            height: 200px;
+            width: 100px;
+            background-color: aqua;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <ul class="nav">
+            <a href="">1</a>
+            <ul>
+                <li>2</li>
+                <li>2</li>
+                <li>2</li>
+            </ul>
+           
+        </ul>
+        <ul class="nav">
+            <a href="">1</a>
+            <ul>
+                <li>2</li>
+                <li>2</li>
+                <li>2</li>
+            </ul>
+            
+        </ul>
+        <ul class="nav">
+            <a href="">1</a>
+            <ul>
+                <li>2</li>
+                <li>2</li>
+                <li>2</li>
+            </ul>
+        </ul>
+    </div>
+    <button>xiala</button>
+    <div class="xiaoguo"></div>
+</body>
+<script>
+  //离开和经过都会触发这个函数，如果只有一个function的话
+    $(".nav").hover(function(){
+        // $(this).children("ul").stop().fadeToggle(200)
+        $(this).children("ul").stop().slideToggle(1000)
+    })
+    // $(".nav").mouseenter(function (){
+    //     $(this).children("ul").slideDown(2000,"linear")
+    // })
+     $("button").click(function(){
+        $('.xiaoguo').slideDown()
+     })
+</script>
+
+</html> 

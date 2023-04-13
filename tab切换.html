@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            /* 不会影响盒子大小 */
+            box-sizing: border-box;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        h4 {
+            margin-top: 20px;
+            float: left;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        .box {
+            position: relative;
+            width: 800px;
+            height: 300px;
+            margin: 0 auto;
+        }
+
+        .head1 {
+            position: relative;
+            margin: 50px auto 0;
+            height: 80px;
+            width: 100%;
+            border: 1px solid black;
+        }
+
+        .box .head1 ul {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .box .head1 ul li {
+            margin-top: 20px;
+            width: 80px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            border: 1px solid black;
+
+        }
+
+        .shangping1 {
+            float: left;
+            height: 220px;
+            width: 300px;
+            border: 1px solid black;
+
+        }
+
+        .shangping1 img {
+            width: 200px;
+            height: 180px;
+            display: inline;
+            margin-left: 50px;
+        }
+
+        .shangping2 {
+            display: flex;
+            float: left;
+            height: 220px;
+            width: 500px;
+            flex-wrap: wrap;
+            /* 换行 */
+            justify-content: space-between;
+            align-content: space-around;
+        }
+
+        .kuai {
+            height: 100px;
+            width: 240px;
+            border: 1px solid black;
+        }
+
+        .kuai img {
+            width: 100%;
+            height: 70px;
+
+        }
+
+        .son {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: 220px;
+            left: 0;
+            top: 80px;
+        }
+
+        .active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="head1">
+            <h4>精选商品</h4>
+            <ul>
+                <li> <a href="javascript:" data-id="1">1</a></li>
+                <li><a href="javascript:" data-id="2">2</a></li>
+                <li><a href="javascript:" data-id="3">3</a></li>
+            </ul>
+        </div>
+        <div class="son active">
+            <div class="shangping1">
+                <img src="png图标/gdpt.jpg" alt="">
+                <p>热卖商品</p>
+            </div>
+            <div class="shangping2">
+                <div class="kuai">
+                    <img src="png图标/gdpt.jpg" alt="">
+                    <p>热卖商品</p>
+                </div>
+                <div class="kuai">
+                    <img src="png图标/gdpt.jpg" alt="">
+                    <p>热卖商品</p>
+                </div>
+                <div class="kuai">
+                    <img src="png图标/gdpt.jpg" alt="">
+                    <p>热卖商品</p>
+                </div>
+                <div class="kuai">
+                    <img src="png图标/gdpt.jpg" alt="">
+                    <p>热卖商品</p>
+                </div>
+            </div>
+        </div>
+        <div class="son ">
+            <div class="shangping1">
+                <img src="png图标/石榴.png" alt="">
+                <p>热卖商品</p>
+            </div>
+            <div class="shangping2">
+                <div class="kuai">
+                    <img src="png图标/石榴.png" alt="">
+                    <p>热卖商品</p>
+                </div>
+                <div class="kuai">
+                    <img src="png图标/石榴.png" alt="">
+                    <p>热卖商品</p>
+                </div>
+                <div class="kuai">
+                    <img src="png图标/石榴.png" alt="">
+                    <p>热卖商品</p>
+                </div>
+                <div class="kuai">
+                    <img src="png图标/石榴.png" alt="">
+                    <p>热卖商品</p>
+                </div>
+            </div>
+        </div>
+        <div class="son">
+            <div class="shangping1">
+                <img src="png图标/樱桃.png" alt="">
+                <p>热卖商品</p>
+            </div>
+            <div class="shangping2">
+                <div class="kuai">
+                    <img src="png图标/南瓜.png" alt="">
+                    <p>热卖商品</p>
+                </div>
+                <div class="kuai">
+                    <img src="png图标/南瓜.png" alt="">
+                    <p>热卖商品</p>
+                </div>
+                <div class="kuai">
+                    <img src="png图标/南瓜.png" alt="">
+                    <p>热卖商品</p>
+                </div>
+                <div class="kuai">
+                    <img src="png图标/南瓜.png" alt="">
+                    <p>热卖商品</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const ul = document.querySelector('.head1 ul')
+        const son = document.querySelector('.box .son')
+        ul.addEventListener('click', function (e) {
+            if (e.target.tagName === 'A') {
+                // e.target.classList.add('active')
+                const i = +e.target.dataset.id
+                //第一个元素指的应该是head，div .head为第一个
+                console.log()
+                console.log(e.target.dataset.id)
+                document.querySelector('.box .active').classList.remove('active')
+                document.querySelector(`.box .son:nth-child(${i + 1})`).classList.add('active')
+                // console.log(e.target.dataset.id)
+            }
+        })
+    </script>
+</body>
+
+</html>

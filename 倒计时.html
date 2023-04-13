@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    
+</style>
+
+<body>
+ 
+ <p class="daojishi">开始进入倒计时</p>
+
+    <script>
+        const p =document.querySelector('.daojishi')
+       let i=prompt("请输入倒计时多少s")
+       let n = setInterval(function(){
+        
+        p.innerHTML=`倒计时：${i}`
+        if (i===0) {
+            clearInterval(n)
+        }
+        i--
+       },1000)
+
+    </script>
+</body>
+
+</html>

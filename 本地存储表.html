@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form {
+            position: relative;
+            margin: 0 auto;
+
+        }
+
+        table {
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            background-color: azure;
+        }
+
+        tr {
+            background-color: bisque;
+        }
+
+        th {
+            width: 80px;
+            height: 30px;
+            font-size: 16px;
+        }
+
+        a {
+            text-decoration: none;
+            list-style: none;
+        }
+
+        .w {
+            display: flex;
+            width: 600px;
+            height: 30px;
+            margin: 20px auto;
+            justify-content: center;
+
+        }
+
+        .time {
+            position: absolute;
+            right: 10px;
+            bottom: 20px;
+        }
+
+        .banner {
+            width: 800px;
+            height: 20px;
+            background-color: cornsilk;
+            margin: 0 auto;
+            text-align: right;
+            padding-right: 30px;
+        }
+
+        span {
+            color: red;
+        }
+
+        tr .utime {
+
+            width: 200px;
+        }
+
+        .uname {
+            width: 70px;
+        }
+
+        .age {
+            width: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="w">
+        <form class="info" autocomplete="off">
+            姓名<input type="text" class="uname">
+            年龄<input type="text" class="age">
+            性别<select class="gender">
+                <option value="男">男</option>
+                <option value="女">女</option>
+            </select>
+            城市
+            <select class="city">
+                <option value="北京">北京</option>
+                <option value="上海">上海</option>
+                <option value="广州">广州</option>
+                <option value="深圳">深圳</option>
+            </select>
+            <button class="add">录入</button>
+        </form>
+    </div>
+    <h1>信息表</h1>
+    <div class="banner">共有<span>0</span>条数据</div>
+    <table>
+        <thead>
+            <tr>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>性别</th>
+                <th>城市</th>
+                <th class="utime">时间</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <div class="time"></div>
+    <script>
+        //时间模块
+        const div = document.querySelector('.time')
+        function getDate() {
+            const data = new Date()
+            let h = data.getHours()
+            let m = data.getMinutes()
+            let s = data.getSeconds()
+            h = h < 10 ? '0' + h : h
+            m = m < 10 ? '0' + m : m
+            s = s < 10 ? '0' + s : s
+            return `现在是${h}点${m}分${s}秒`
+        }
+        setInterval(function () { div.innerHTML = getDate() }, 1000)
+        //渲染模块
+        const arr = [
+            {
+                id: 1,
+                uname: '小明',
+                age: 18,
+                gender: '女',
+                city: '深圳',
+                time: '2023 / 1 / 29 18: 00: 00'
+            }
+        ]
+        //将arr的数据存入本地data的本地存储
+        // localStorage.setItem('data', JSON.stringify(arr))
+        //创建新数组，本地数组命名为data，没有数据反回的数组
+        const newdata = JSON.parse(localStorage.getItem('data')) || []
+        const tbody = document.querySelector('tbody')
+        //遍历 数组 将数据放入tbody
+        function render() {
+            //获取新表单里面的值
+            const trArr = newdata.map(function (ele, index) {
+                return `<tr>
+                <th>${ele.id}</th>
+                <th>${ele.uname}</th>
+                <th>${ele.age}</th>
+                <th>${ele.gender}</th>
+                <th>${ele.city}</th>
+                <th> ${ele.time}</th>
+                <th><a href="javascript:;" data-id="${index}">删除</a></th>
+            </tr>`
+            })
+            //将tr转化成字符串的形式，放入tbody
+            tbody.innerHTML = trArr.join('')
+            document.querySelector('.banner span').innerHTML = newdata.length
+        }
+        render()
+        const info = document.querySelector('.info')
+        const uname = document.querySelector('.uname')
+        const age = document.querySelector('.age')
+        const gender = document.querySelector('.gender')
+        const city = document.querySelector('.city')
+        info.addEventListener('submit', function (e) {
+            //阻止默认行为
+            e.preventDefault()
+            if (!uname.value || !age.value) {
+                return alert('输入内容不能为空')
+            }
+            //将数据放如本地存储
+            newdata.push({
+                //最后一个数据id的索引号加1,如果数组长度为0，返回false，添加的id为1
+                id: newdata.length ? newdata[newdata.length - 1].id + 1 : 1,
+                uname: uname.value,
+                age: age.value,
+                gender: gender.value,
+                city: city.value,
+                //获取当前时间
+                time: new Date().toLocaleString()
+            })
+            render()
+            this.reset()
+            //把数组重新存入本地表单，把newdata转换成字符串的形式，存入本地存储
+            localStorage.setItem('data', JSON.stringify(newdata))
+        })
+        tbody.addEventListener('click', function (e) {
+            //判断是否点击的是不是删除按钮
+            if (e.target.tagName === 'A') {
+                // alert('删除')
+                console.log(e.target.dataset.id)
+                newdata.splice(e.target.dataset.id, 1)
+                //重新遍历数组
+                render()
+                //把最新数组放入本地存储
+                localStorage.setItem('data', JSON.stringify(newdata))
+            }
+        })
+    </script>
+</body>
+
+</html>

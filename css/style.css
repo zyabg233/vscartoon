@@ -1,0 +1,151 @@
+* {
+    padding: 0;
+    margin: 0;
+    /* 不会影响盒子大小 */
+    box-sizing: border-box;
+}
+li {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+}
+@keyframes move {
+    0% {
+        transform: translate(0) rotate(0);
+    }
+
+    100% {
+        transform: translate(100px, 200px) rotate(180deg);
+    }
+
+}
+.cartoon1 {
+    width: 100px;
+    height: 100px;
+    transition: all 0.5s;
+    background-color: aqua;
+    animation-name: move;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+.cartoon1:hover {
+    transform: translate(100px, 200px) rotate(180deg);
+}
+.anniu {
+    height: 100px;
+    border: 1px solid black;
+    overflow: hidden;
+    z-index: 2;
+}
+.w {
+    height: 30px;
+    width: 372px;
+    margin: 35px auto;
+    border: 1px solid black;
+}
+.anniu ul li {
+    border: 1px solid green;
+    border-radius: 28px;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    float: left;
+    margin-right: 30px;
+    line-height: 30px;
+}
+
+.anniu ul li:hover {
+    transform: scale(1.5);
+}
+
+.anniu ul li:nth-child(1):hover {
+    transform: scale(1);
+}
+
+.anniu ul li:nth-child(6):hover {
+    transform: scale(1);
+}
+
+.anniu ul li {
+    font-size: 12px;
+}
+
+.anniu ul {
+    margin: 0 auto;
+}
+
+.anniu ul .before {
+    width: 50px;
+    height: 30px;
+    border-radius: 0;
+}
+
+.anniu ul .next {
+    width: 50px;
+    height: 30px;
+    border-radius: 0;
+    margin-right: 0;
+}
+
+.map {
+    position: relative;
+    height: 300px;
+    width: 500px;
+    color: aliceblue;
+    background-color: black;
+    margin: 0 auto;
+}
+.redian::after{
+    font-family: 'icomoon';
+    content: "";
+    color: white;
+}
+.redian {
+    position: absolute;
+    top: 111px;
+    left: 166px;
+}
+
+.redian .dotted {
+    width: 10px;
+    height: 10px;
+    background-color: blue;
+    border-radius: 50%;
+}
+
+.redian div[class^="palus"] {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    box-shadow: 0 0 12px #009dfd;
+    border-radius: 50%; 
+    animation: pulse 1.8s  linear infinite;
+    
+}
+.redian div.palus2{
+    animation-delay:0.6s;
+}
+.redian div.palus3 {
+    animation-delay: 1.2s;
+}
+@keyframes pulse {
+    0% {
+        
+    }
+    70% {
+       width: 40px;
+       height: 40px;
+       /* 透明度 */
+       opacity: 1;
+    }
+    100%{
+        width: 70px;
+            height: 70px;
+            opacity: 0;
+    }
+}

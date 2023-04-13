@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            /* 不会影响盒子大小 */
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f3f3f3;
+        }
+
+        .main {
+            position: relative;
+            width: 1200px;
+            height: 800px;
+            margin: 50px auto;
+        }
+
+        .pic {
+            width: 700px;
+            height: 400px;
+        }
+
+        .middle {
+            position: relative;
+            float: left;
+            width: 600px;
+            height: 400px;
+        }
+
+        .pic img {
+            float: left;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .pic ul {
+
+            display: flex;
+            flex-wrap: wrap;
+            align-content: space-between;
+
+        }
+
+        .small ul li {
+            position: relative;
+            width: 100px;
+            height: 99px;
+        }
+
+        .small ul li img {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            top: 0;
+            right: 0;
+        }
+
+        .small {
+            position: relative;
+            float: left;
+            height: 400px;
+            width: 100px;
+        }
+
+        .active {
+            border: 2px solid green;
+        }
+
+        .blackhz {
+            position: absolute;
+            width: 300px;
+            height: 200px;
+            background-color: rgb(0, 0, 0, 0.3);
+            cursor: move;
+            display: none;
+        }
+
+        .large {
+            position: absolute;
+            width: 600px;
+            height: 400px;
+            top: 0;
+            left: 610px;
+            display: none;
+            background: url(png图标/gdpt.jpg) no-repeat;
+            z-index: 2;
+            background-size: 1200px 800px;
+        }
+        body{
+            height: 3000px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="pic">
+            <div class="middle"><img src="png图标/gdpt.jpg" alt="" width="600px" height="400px">
+                <div class="blackhz"></div>
+                <div class="large"></div>
+            </div>
+            <div class="small">
+                <ul>
+                    <li class="active"><img src="png图标/gdpt.jpg" alt=""></li>
+                    <li><img src="png图标/樱桃.png" alt=""></li>
+                    <li><img src="png图标/香蕉.png" alt=""></li>
+                    <li><img src="png图标/西瓜.png" alt=""></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    const small = document.querySelector('.small')
+    const middle = document.querySelector('.middle')
+    const blackhz = document.querySelector('.blackhz')
+    const large = document.querySelector('.large')
+
+    small.addEventListener('mouseover', function (e) {
+        if (e.target.tagName === 'IMG') {
+            // console.log(1)
+            this.querySelector('.active').classList.remove('active')
+            e.target.parentNode.classList.add('active')
+            middle.querySelector('img').src = e.target.src
+            large.style.backgroundImage = `url(${e.target.src})`
+        }
+    })
+    middle.addEventListener('mouseenter', show)
+    middle.addEventListener('mouseleave', hide)
+    large.addEventListener('mouseenter', show)
+    large.addEventListener('mouseleave', hide)
+    blackhz.addEventListener('mouseenter', show)
+    let timeId = 0
+    function show() {
+        clearTimeout(timeId)
+        // blackhz.style.display = 'block'
+        large.style.display = 'block'
+    }
+    function hide() {
+        timeId = setTimeout(function () {
+            // blackhz.style.display = 'none'
+            large.style.display = 'none'
+        }, 200)
+    }
+    middle.addEventListener('mouseenter', function () {
+        blackhz.style.display = 'block'
+    })
+    middle.addEventListener('mouseleave', function () {
+        blackhz.style.display = 'none'
+    })
+    middle.addEventListener('mousemove', function (e) {
+        //获取主要图片的
+        let x = e.pageX - middle.getBoundingClientRect().left
+        let y = e.pageY - middle.getBoundingClientRect().top - document.documentElement.scrollTop
+        if (x >= 0 && x <= 600 && y >= 0 && y <= 400) {
+            // blackhz.style.left = x + 'px'
+            // blackhz.style.top = y + 'px'
+            let mx = 0, my = 0
+            if (x <= 150) mx = 0
+            if (x > 150 && x <= 450) mx = x - 150
+            if (x > 450) mx = 300
+            if (y <= 100) my = 0
+            if (y > 100 && y <= 300) my = y - 100
+            if (y > 300) my = 200
+            blackhz.style.left = mx + 'px'
+            blackhz.style.top = my + 'px'
+            large.style.backgroundPositionX = -2 * mx + 'px'
+            large.style.backgroundPositionY = -2 * my + 'px'
+        }
+    })
+</script>
+
+</html>

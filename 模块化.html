@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .box {
+        position: absolute;
+        width: 250px;
+        height: 150px;
+        bottom: 50%;
+        left: 50%;
+        border: 1px solid black;
+        /* 向下 向右 模糊度 颜色 */
+        box-shadow: 10px 10px 10px black;
+
+    }
+
+    .header {
+        width: 100%;
+        height: 50px;
+        margin: auto;
+        font-size: 20px;
+        line-height: 50px;
+
+    }
+
+    i {
+        float: right;
+        margin-right: 15px;
+        cursor: pointer;
+
+    }
+
+    .body {
+        font-size: 22px;
+    }
+</style>
+
+<body>
+    <button id="denglu">denglu</button>
+    <button id="zhuce">zhuce</button>
+    <!-- <div class="box">
+        <div class="header">温馨提示<i>x</i></div>
+        <div class="body">nihao </div>
+    </div> -->
+</body>
+<script src="lodash.min.js"></script>
+<script>
+    //立刻执行函数
+    (function () {
+        const arr = [1, 2, 3]
+        const arr1 = {
+            age: 18,
+            family: [{
+                father: 'xiao',
+                mother: 'ming'
+            },
+            {
+                father1: 'xiao',
+                mother2: 'ming'
+            }
+            ]
+        }
+        // const o =Math.max.apply(null,arr)
+        //     // console.log(o)
+        //     //不会立刻调用函数
+        //     const o2 = Math.max.bind(null,...arr)
+        //         console.log(o2)
+        //互不影响                                                                                                                                                                                                                                                                                                                                                                                                                                              2
+        arr1.age = 1
+        console.log(arr1)
+        const o3 = _.cloneDeep(arr1)
+        o3.age = 2
+        console.log(o3)
+        console.log(arr1)
+    })
+    function Modal(title = '', message = '') {
+        //创建div
+        this.modal = document.createElement('div')
+        //给div标签命名
+        this.modal.className = 'box'
+        this.modal.innerHTML = `<div class="header">${title}<i>x</i></div>
+        <div class="body">${message} </div>`
+    }
+    //给原型对象写一个方法
+    Modal.prototype.open = function () {
+        //把modal写入到body里面 显示到body里面 this指向当前实例对象
+        document.body.append(this.modal)
+        this.modal.querySelector('i').addEventListener('click', () => {
+            //需要关闭的是实例对象 箭头函数指向的是上一级的this 也就是实例对象，如果用function的话，this指向的是i
+            this.close()
+        })
+    }
+    //关闭方法
+    Modal.prototype.close = function () {
+        this.modal.remove()
+    }
+    document.querySelector('#denglu').addEventListener('click', () => {
+        //调用modal构造函数
+        const denglu = new Modal('温馨提示', 'denglu')
+        denglu.open()
+    })
+    document.querySelector('#zhuce').addEventListener('click', () => {
+        //调用modal构造函数
+        const zhuce = new Modal('温馨提示', 'zhuce')
+        zhuce.open()
+    })
+</script>
+
+</html>

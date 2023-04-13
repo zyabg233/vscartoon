@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            /* 不会影响盒子大小 */
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .box {
+            width: 400px;
+            height: 1000px;
+            margin: 20px auto;
+        }
+
+        .sonbox {
+            position: relative;
+            width: 300px;
+            height: 42px;
+            border: 1px solid black;
+            margin: 25px auto;
+        }
+
+        input {
+            margin-left: 10px;
+            width: 150px;
+            height: 40px;
+            /* 去除选中默认边框 */
+            outline: none;
+            border: 0;
+            font-size: 16px;
+        }
+
+        span {
+            position: absolute;
+            color: red;
+            left: 8px;
+            top: 42px;
+            font-size: 12px;
+        }
+
+        .code {
+            margin-right: 10px;
+            line-height: 42px;
+            float: right;
+            color: green;
+        }
+
+        button {
+            background-color: green;
+            width: 300px;
+            height: 42px;
+            font-size: 16px;
+            margin-left: 52px;
+            color: aliceblue;
+        }
+    </style>
+</head>
+
+<body>
+    <form class="box" autocomplete="off">
+      
+        <div class="sonbox">
+            <input required type="text" placeholder="输入用户名" name="username">
+            <span></span>
+        </div>
+        <div class="sonbox">
+            <input required type="text" placeholder="输入手机号" name="phone">
+            <span></span>
+        </div>
+        <div class="sonbox">
+            <input type="text" placeholder="短信验证码" class="yanzheng" name="code">
+            <span></span>
+            <a class="code" href="javascript:;">发送验证码</a>
+        </div>
+        <div class="sonbox">
+            <input required type="password" placeholder="设置6-15位密码" name="mima">
+            <span></span>
+        </div>
+        <div class="sonbox">
+            <input required type="password" placeholder="请再次输入上面密码" name="qrmima">
+            <span></span>
+        </div>
+        <button>下一步</button>
+    </form>
+</body>
+<script>
+    //验证码模块
+    const code = document.querySelector('.code')
+    // 通过一个变量控制
+    let flag = true //节流法
+    code.addEventListener('click', function () {
+        if (flag) {
+            flag = false
+            let i = 5
+            //点击后立马触发
+            code.innerHTML = `0${i}秒后重新获取`
+            let timeId = setInterval(function () {
+                i--
+                code.innerHTML = `0${i}秒后重新获取`
+                if (i === 0) {
+                    clearInterval(timeId)
+                    flag = true
+                    code.innerHTML = `重新获取`
+                }
+            }, 1000)
+        }
+    })
+
+    //验证用户信息
+    const username = document.querySelector('[name=username]')
+    //值发生变化的时候
+    username.addEventListener('change', verifyname)
+    function verifyname() {
+        // console.log(1)
+        //用户名规则
+        const reg = /^[a-zA-Z0-9-_]{6,10}$/
+        //username下一 个兄弟元素
+        const span = username.nextElementSibling
+        if (!reg.test(username.value)) {
+            span.innerText = '输入不合法，请输入6-10位'
+            return false
+        }
+        span.innerText = ''
+        return true
+    }
+
+    //手机号
+    const phone = document.querySelector('[name=phone]')
+    //值发生变化的时候
+    phone.addEventListener('change', verifyphone)
+    function verifyphone() {
+        // console.log(1)
+        //用户名规则
+        const reg = /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/
+        //username下一 个兄弟元素
+        const span = phone.nextElementSibling
+        if (!reg.test(phone.value)) {
+            span.innerText = '输入不合法,请输入正确的11位电话号码'
+            return false
+        }
+        span.innerText = ''
+        return true
+    }
+    // 验证码
+    const codeinput = document.querySelector('[name=code]')
+    codeinput.addEventListener('change', verifycode)
+    function verifycode() {
+        //用户名规则
+        const reg = /^\d{6}$/
+        //username下一 个兄弟元素
+        const span = codeinput.nextElementSibling
+        if (!reg.test(codeinput.value)) {
+            span.innerText = '输入不合法,请输入正确的6位数验证码'
+            return false
+        }
+        span.innerText = ''
+        return true
+    }
+    // 密码
+    const mima = document.querySelector('[name=mima]')
+    mima.addEventListener('change', verifymima)
+    function verifymima() {
+        //用户名规则
+        const reg = /^[a-zA-Z0-9-_]{6,15}$/
+        //username下一 个兄弟元素
+        const span = mima.nextElementSibling
+        if (!reg.test(mima.value)) {
+            span.innerText = '输入不合法,请输入正确的6到15位密码'
+            return false
+        }
+        span.innerText = ''
+        return true
+    }
+    //验证密码
+    const qrmima = document.querySelector('[name=qrmima]')
+    qrmima.addEventListener('change', verifyqrmima)
+    function verifyqrmima() {
+        const span = qrmima.nextElementSibling
+        if (qrmima.value !== mima.value) {
+            span.innerText = '两次密码不一致'
+            return false
+        }
+        span.innerText = ''
+        return true
+    }
+    const form = document.querySelector('form')
+    form.addEventListener('submit', function (e) {
+        //值不通过阻止默认行为提交事件
+        if (!verifyname()) e.preventDefault()
+        if (!verifyphone()) e.preventDefault()
+        if (!verifymima()) e.preventDefault()
+        if (!verifyqrmima()) e.preventDefault()
+        // console.log(verifyname())
+
+
+
+    })
+</script>
+
+</html>

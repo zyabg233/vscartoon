@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        input {
+            margin: 0 auto;
+            width: 100px;
+            height: 20px;
+        }
+
+        div {
+            position: relative;
+            top: 20px;
+            width: 100px;
+            height: 20px;
+            margin: 0 auto;
+
+            margin-bottom: 130px;
+        }
+
+
+
+        ul,
+        li {
+            list-style: none;
+            width: 100px;
+            height: 20px;
+            line-height: 20px;
+            font-size: 12px;
+            background: white;
+            border: 1px solid black;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .xianshi {
+            display: block;
+        }
+
+        .yc {
+            float: right;
+            font-size: 12px;
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <input type="text" placeholder="请输入内容">
+        <ul class="hidden">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+    </div>
+    <div>
+        <input type="text" class="jiance">
+        <span class="yc">0/200字</span>
+    </div>
+   
+    <script>
+        const input = document.querySelector('[type=text]')
+        const list = document.querySelector('.hidden')
+        const jiance = document.querySelector('.jiance')
+        const yc = document.querySelector('.yc')
+
+
+        input.addEventListener('focus', function () {
+            list.style.display = 'block'
+            // list.className = 'xianshi' 一次性，要清除显示才能再次添加
+        })
+        input.addEventListener('blur', function () {
+            list.style.display = 'none'
+
+        })
+        input.addEventListener('keyup', function (e) {
+            // console.log(e.key)
+            if (e.key === 'Enter') {
+                console.log('按下了回车')
+            }
+
+        })
+        // input.addEventListener('keydown', function () {
+        //     console.log('anxia')
+
+        // })
+        jiance.addEventListener('focus', function () {
+            yc.style.opacity = 1
+        })
+        jiance.addEventListener('blur', function () {
+            yc.style.opacity = 0
+        })
+        jiance.addEventListener('input', function () {
+            // console.log(jiance.value.length)
+            yc.innerHTML = `${jiance.value.length}/200字`
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no,maximum-scale=1.0,minimum-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            perspective: 700px;
+        }
+
+        .box {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 100px auto;
+            transform-style: preserve-3d;
+            animation: rotate 5s linear infinite;
+        }
+
+        .box div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+
+
+        }
+
+        .box div:nth-child(1) {
+            transform: translateZ(50px);
+            background-color: red;
+
+        }
+
+        .box div:nth-child(2) {
+            transform: rotateY(90deg) translateZ(50px);
+            background-color: aqua;
+
+
+        }
+
+        .box div:nth-child(3) {
+            transform: rotateY(180deg) translateZ(50px);
+            background-color: bisque;
+
+        }
+
+        .box div:nth-child(4) {
+            transform: rotateY(270deg) translateZ(50px);
+            background-color: blue;
+
+        }
+
+        .box div:nth-child(5) {
+            transform: rotateX(90deg) translateZ(50px);
+            background-color: blueviolet;
+
+        }
+
+        .box div:nth-child(6) {
+            transform: rotateX(90deg) translateZ(-50px);
+            background-color: burlywood;
+
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotateX(0) rotateY(0) rotateZ(0);
+            }
+
+            100% {
+                transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+            }
+
+        }
+
+        li {
+            list-style: none;
+            margin-right: 20px;
+            margin-bottom: 5px;
+            margin-top: 5px;
+        }
+
+        .liebiao {
+
+            height: 50px;
+            width: 100px;
+            margin: 0 auto;
+            transform-style: preserve-3d;
+            transition: all .6s;
+        }
+
+        .liebiao:hover {
+            transform: rotateX(90deg);
+        }
+
+        ul {
+            display: flex;
+            width: 600px;
+            height: 300px;
+            margin: 0 auto;
+            background-color: black;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            align-content: space-between;
+        }
+
+        .liebiao div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: aliceblue;
+            padding: 10px;
+        }
+
+        .liebiao div:nth-child(1) {
+            transform: translateZ(25px);
+            background-color: aqua;
+        }
+
+        .liebiao div:nth-child(2) {
+            transform: rotateX(270deg) translateZ(25px);
+            background-color: blueviolet;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <ul>
+        <li>
+            <div class="liebiao">
+                <div>nihao</div>
+                <div>buhao</div>
+            </div>
+        </li>
+        <li>
+            <div class="liebiao">
+                <div>nihao</div>
+                <div>buhao</div>
+            </div>
+        </li>
+        <li>
+            <div class="liebiao">
+                <div>nihao</div>
+                <div>buhao</div>
+            </div>
+        </li>
+        <li>
+            <div class="liebiao">
+                <div>nihao</div>
+                <div>buhao</div>
+            </div>
+        </li>
+        <li>
+            <div class="liebiao">
+                <div>nihao</div>
+                <div>buhao</div>
+            </div>
+        </li>
+        <li>
+            <div class="liebiao">
+                <div>nihao</div>
+                <div>buhao</div>
+            </div>
+        </li>
+        <li>
+            <div class="liebiao">
+                <div>nihao</div>
+                <div>buhao</div>
+            </div>
+        </li>
+    </ul>
+    </div>
+</body>
+
+</html>

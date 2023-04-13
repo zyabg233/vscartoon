@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    .box {
+        display: flex;
+        margin: 100px auto;
+        height: 300px;
+        width: 600px;
+        border-bottom: 1px solid pink;
+        border-left: 1px solid pink;
+        justify-content: space-around;
+        /* 设置主轴元素平分剩余空间 */
+        align-items: flex-end;
+        /* 设置侧轴元素从下到排列 */
+        text-align: center;
+        /* 设置文字居中 */
+    }
+
+    .box>div {
+        display: flex;
+        height: 100px;
+        width: 30px;
+        background-color: pink;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .box>div>span {
+
+        margin-top: -30px;
+    }
+
+    .box div p {
+        margin-left: -20px;
+        margin-bottom: -35px;
+        width: 70px;
+        font-size: 16px;
+    }
+</style>
+
+<body>
+
+    <script>
+        let arr = []
+        for (let i = 0; i < 3; i++) {
+            arr.push(prompt(`第${i + 1}个柱状图的高度`))
+        }
+        document.write(`<div class="box">`)
+        for (let i = 0; i < arr.length; i++) {
+            document.write(` <div style="height:${arr[i]}px;"><span>${arr[i]}</span>
+            <p>第${i + 1}季度</p>
+        </div>`)
+        }
+        document.write(`</div>`)
+
+    </script>
+</body>
+
+</html>

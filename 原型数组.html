@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    const arr = [1,2,3]
+    Array.prototype.max = function (){
+        return Math.max(...this)
+    }
+    
+   //this 指向调用者arr
+    // console.log(Math.max([1,2,3]))
+    console.log(arr.max())
+    //
+    //const fn =(uname,name,age,gender)=>({unanme:uname,name:name},{age:age,gender:gender})
+    //console.log(fn(1,2,4,5))
+    Array.prototype.sum = function(){
+       return this.reduce((pre,current) => pre+current,0)
+    }
+    console.log(arr.sum())
+
+const obj ={
+    age:18,
+    family:[1,2],
+    home:{
+        baby:4
+    }
+}
+const js = JSON.stringify(obj)
+        console.log(js)
+const o =JSON.parse(js)
+            console.log(o)
+</script>
+</html>

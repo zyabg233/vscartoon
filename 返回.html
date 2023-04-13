@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #hezi {
+            position: fixed;
+            height: 70px;
+            width: 100px;
+            border: 1px solid black;
+            right: 10px;
+            top: 200px;
+            font-size: 30px;
+            align-items: center;
+
+        }
+
+        body {
+            height: 3000px;
+        }
+
+        .toubu {
+            position: fixed;
+            top: -70;
+            width: 100%;
+            height: 70px;
+            background-color: aqua;
+            transition: all 1s;
+        }
+
+        .big {
+            height: 1000px;
+            width: 900px;
+            margin: 0 auto;
+        }
+
+        .main {
+            width: 400px;
+            height: 400px;
+            margin: 500px auto;
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="toubu">
+
+    </div>
+    <div id="hezi">
+        <a href="javascript:" id="fanhui">返回</a>
+    </div>
+
+    <div class="main"></div>
+    <script>
+        const hezi = document.querySelector('#hezi')
+        const a = document.querySelector('#fanhui')
+        const main = document.querySelector('.main')
+        const toubu = document.querySelector('.toubu')
+        window.addEventListener('scroll', function () {
+            const n = document.documentElement.scrollTop
+            if (n >= 300) {
+                hezi.style.opacity = 1
+            } else {
+                hezi.style.opacity = 0
+
+            }
+        })
+        a.addEventListener('click', function () {
+            document.documentElement.scrollTop = 0
+        })
+        window.addEventListener('scroll', function () {
+            const n = document.documentElement.scrollTop
+            if (n >= main.offsetTop) {
+                toubu.style.top = 0
+            } else {
+                toubu.style.top = '-70px'
+
+            }
+        })
+    </script>
+</body>
+
+</html>
